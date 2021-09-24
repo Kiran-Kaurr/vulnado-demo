@@ -10,12 +10,12 @@ import io.jsonwebtoken.security.Keys;
 import javax.crypto.SecretKey;
 
 public class User {
-  public String id, username, hashedPassword;
+  public String id, username, password;
 
-  public User(String id, String username, String hashedPassword) {
+  public User(String id, String username, String password) {
     this.id = id;
     this.username = username;
-    this.hashedPassword = hashedPassword;
+    this.password = password;
   }
 
   public String token(String secret) {
@@ -48,7 +48,7 @@ public class User {
       stmt = cxn.createStatement();
       System.out.println("Opened database successfully");
 
-      String query = "select * from users where username = '" + encodeForSQL(un) + "' limit 1";
+      String query = "select * from users where username = '" + un + "' limit 1";
       System.out.println(query);
       ResultSet rs = stmt.executeQuery(query);
       if (rs.next()) {
